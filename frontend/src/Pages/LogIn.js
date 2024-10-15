@@ -24,7 +24,7 @@ function Login() {
         return handleError('Please fill in all fields');
     }
     try{
-        const url = "http://localhost:8080/auth/login";
+        const url = "https://test-deploy-3fow4p4fo-vaishnavi-chavans-projects.vercel.app/auth/login";
         const responce = await fetch(url, {
             method: 'POST',
             headers: {
