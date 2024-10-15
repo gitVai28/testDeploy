@@ -1,10 +1,20 @@
 const mongoose = require('mongoose');
 
-const mongo_url = process.env.MONGO_URL;
+const connectDB = async () => {
+  try {
+    const mongo_url = process.env.MONGO_URL;
+    if (!mongo_url) {
+      throw new Error('MONGO_URL is not defined in the environment variables');
+    }
 
-mongoose.connect(mongo_url)
-    .then(() => {
-        console.log('Connected to MongoDB');
-    }).catch((err) => {
-        console.log('mongo connection failed',err);
-    })
+    await mongoose.connect(mongo_url);
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error.message);
+    process.exit(1);
+  }
+};
+
+connectDB();
+
+module.exports = mongoose;
